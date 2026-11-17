@@ -1,0 +1,58 @@
+DEPENDENCIAS INCLUIDAS EN "vendor"
+==================================
+
+Scrappy funciona sin instalar nada: las bibliotecas ya están
+copiadas en la carpeta vendor y el programa las carga desde ahí. No se
+modifica el Python del sistema ni se usa la red.
+
+Versiones exactas incluidas
+---------------------------
+    pymupdf                1.28.2    (lectura de PDF)
+    Pillow                 13.0.0    (imágenes)
+    numpy                  2.5.5     (cálculo)
+    opencv-python-headless 5.0.0.93  (detección de zonas)
+
+Compiladas para: Windows x64 y CPython 3.15. SCRAPPY.BAT utiliza el CPython
+3.15.0 integrado en la carpeta python de Scrappy, sin instalar nada.
+
+Licencias y créditos
+--------------------
+Cada biblioteca conserva su licencia original en vendor\LICENCIAS:
+
+    LICENSE-pymupdf.txt         PyMuPDF (AGPL-3.0)
+    pillow\LICENSE.txt          Pillow (MIT-CMU)
+    numpy\LICENSE.txt           NumPy (BSD-3-Clause), con las licencias de
+                                sus componentes en subcarpetas
+    opencv\LICENSE.txt          OpenCV (Apache-2.0)
+    opencv\LICENSE-3RD-PARTY.txt  Componentes de terceros de OpenCV
+
+Los metadatos completos de cada paquete siguen en sus carpetas *.dist-info.
+
+Código fuente de los componentes bajo AGPL
+------------------------------------------
+Los archivos de fuente oficiales de PyMuPDF y MuPDF están en
+vendor/LICENCIAS/FUENTES/. Son versiones reempaquetadas que excluyen los PDF
+de pruebas y documentación de terceros; el resto se conserva. Los originales
+íntegros, sus versiones y procedencia se encuentran aquí:
+
+PyMuPDF 1.28.2, código fuente y configuración de compilación:
+https://pypi.org/project/PyMuPDF/1.28.2/#files
+https://github.com/pymupdf/PyMuPDF/releases/tag/1.28.2
+SHA-256 original: 5e0be7908a715aa20333caddd73f1d6f01e4cd0c26e869fa2dd0b7f344da2249
+
+MuPDF 1.28.2, código fuente usado por esa versión de PyMuPDF:
+https://casper.mupdf.com/downloads/archive/mupdf-1.28.2-source.tar.gz
+SHA-256 original: 44075a84e329db55b9bef5f342a70fd26d69e48ad1d33cb89d9664581c641156
+
+La distribución del programa con estos componentes puede conllevar
+obligaciones adicionales bajo AGPL. Quien redistribuya el conjunto debe
+mantener disponible el código fuente correspondiente y revisar las licencias.
+
+Si alguna vez hay que reinstalar
+--------------------------------
+Preferentemente, restaurar vendor desde una copia completa de Scrappy. Como
+alternativa, instalar_dependencias.bat requiere Internet y un CPython 3.15 x64
+externo con pip; el intérprete integrado no incluye pip. Instala las mismas
+versiones en vendor sin modificar el Python del sistema. Después, ejecutar
+SCRAPPY.BAT. No es necesario para el uso normal. Para usar otro Python sin
+alterar vendor, consulta las instrucciones de SCRAPPY_VENDOR en README.md.

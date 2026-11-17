@@ -1,0 +1,17 @@
+INGESTA/*
+!INGESTA/.gitkeep
+ENTREGA/*
+!ENTREGA/.gitkeep
+
+__pycache__/
+*.pyc
+*.pyo
+
+_analisis/
+.dependencias-python-propio/
+.env
+.env.*
+*.key
+*.pem
+*.pfx
+*.p12

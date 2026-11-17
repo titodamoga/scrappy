@@ -1,0 +1,82 @@
+Scrappy
+=======
+
+Convierte volcados PDF de ExamTopics en archivos VCE para VCE Designer/Player.
+Guía completa: README.md.
+
+REQUISITOS
+----------
+- Windows x64 (64 bits).
+- CPython 3.15.0 integrado en la carpeta "python": no hay que instalar Python.
+- PyMuPDF, Pillow, numpy y OpenCV están incluidas en "vendor". Para el uso
+  normal no hace falta Internet, pip, ni permisos de administrador. No se usa
+  ni modifica el Python del PC. Algunas instalaciones de Windows pueden
+  necesitar componentes de ejecución de Microsoft adicionales.
+
+Conserva completas las carpetas "python" y "vendor". Si falta alguna,
+restáurala desde una copia completa de Scrappy.
+
+USO
+---
+1. Copia los PDF en INGESTA (puede haber varios; se procesan por orden de nombre).
+2. Ejecuta SCRAPPY.BAT (doble clic) o, desde una consola:
+       python\python.exe scrappy.py
+3. Recoge ENTREGA\Scrappy.vce. Es un unico archivo con las preguntas de todos
+   los PDF de INGESTA, unidas en orden alfabetico.
+4. El registro completo queda en ENTREGA\scrappy-AAAAMMDD-HHMMSS.txt y en pantalla.
+
+El .bat usa exclusivamente el Python integrado mediante rutas relativas.
+Si falta, avisa y no usa el Python instalado en el PC.
+
+El programa nunca sobrescribe: si el archivo ya existe, añade _2, _3, etc.
+Para usar otro Python, consulta los pasos de instalación y ejecución en README.md.
+
+ARCHIVOS
+--------
+SCRAPPY.BAT                Lanzador con Python integrado.
+scrappy.py                 Programa principal.
+pdf_reader.py              Lee preguntas, opciones, respuestas e imágenes del PDF.
+graphics.py                Detecta zonas marcadas y normaliza imágenes a JPEG.
+vce_writer.py              Genera VCE 1.1 sin archivo de partida.
+INGESTA\                   PDF de entrada.
+ENTREGA\                   VCE y registros generados.
+python\                    Python integrado y su licencia (no borrar).
+vendor\                    Dependencias incluidas (no borrar).
+vendor\DEPENDENCIAS.txt    Versiones, créditos y licencias.
+instalar_dependencias.bat  Reparación opcional; requiere Python 3.15 x64 y pip.
+requirements.txt           Versiones exactas incluidas.
+LICENSE                    Licencia 0BSD del código propio de Scrappy.
+
+QUÉ CONVIERTE
+-------------
+- Preguntas de opción única y múltiple: enunciado, opciones y respuesta.
+- Preguntas con imágenes: dibuja las opciones completas como zonas seleccionables.
+  Si cada alternativa tiene su propia imagen, conserva todas sus imágenes.
+- Preguntas de áreas (HOTSPOT) en tablas de declaraciones Sí/No: detecta los
+  botones de opción, alinea la imagen de respuesta y marca las zonas elegidas.
+- Preguntas de área con desplegables o código: localiza la opción elegida y
+  reconstruye todas las alternativas cuando identifica con seguridad la lista.
+- Preguntas de arrastrar y colocar (DRAG DROP): comprueba las casillas y compara
+  visualmente cada respuesta con las opciones; rechaza resultados ambiguos.
+
+LÍMITES CONOCIDOS
+-----------------
+- Las preguntas no reconocidas conservan texto, opciones e imágenes disponibles,
+  con el aviso PREGUNTA NO DETECTADA CORRECTAMENTE. No se marca una respuesta.
+- Scrappy no realiza OCR: no lee letras dentro de capturas. Los PDF sin capa
+  de texto se recuperan como tarjetas o imágenes con aviso y sin respuestas
+  interactivas. La separación no está garantizada: revisa
+  cada tarjeta y sus límites. Los rangos solapados producen duplicados.
+- Las respuestas convertidas se copian del PDF y no se verifican independientemente;
+  su explicación dice "Creado con Scrappy".
+- Duración (120 minutos) y nota de corte (800) son valores predeterminados,
+  no comprobados para el examen original. El formato no está basado en una
+  especificación oficial.
+- Comprueba siempre el resultado en Designer y, si es posible, en Player.
+
+LICENCIA Y CONTENIDOS
+--------------------
+El código propio de Scrappy se distribuye bajo 0BSD (ver LICENSE); las
+bibliotecas y Python conservan sus propias licencias, incluida la AGPL de
+PyMuPDF. El contenido de los PDF pertenece a sus autores o titulares; quien
+lo utilice debe disponer de los permisos y respetar las condiciones aplicables.
